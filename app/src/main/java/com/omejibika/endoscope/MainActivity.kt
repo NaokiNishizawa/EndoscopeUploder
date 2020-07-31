@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.*
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -303,17 +304,20 @@ class MainActivity : AppCompatActivity(), FolderSelectDialogFragment.OnFolderSel
         val savePath = pref.getString("savepath", "")
         val ssid = pref.getString("ssid", "")
 
+        var resultStr = ""
         try {
-            if (validate(host, port, userName, password, ssid)) {
+            resultStr = validate(host, port, userName, password, ssid)
+            if (resultStr.isBlank()) {
                 /*** 現在接続されているWi-FiのSSIDを取得 ***/
                 val currentSSID = SSIDManager.getSSID(this)
                 if (!ssid.equals(currentSSID)) {
                     /*** プリファレンスに設定されているSSIDに接続 ***/
                     if (!SSIDManager.reconnectPreferenceSSID(this, ssid)) {
                         //Common.showDialog(this, getString(R.string.dialog_title_error), getString(R.string.error_ssid_not_registered))
-                        val toast = Toast.makeText(this, getString(R.string.error_ssid_not_registered), Toast.LENGTH_SHORT)
-                        toast.show()
-                        return "error"
+                        //val toast = Toast.makeText(this, getString(R.string.error_ssid_not_registered), Toast.LENGTH_SHORT)
+                        //toast.show()
+                        resultStr = getString(R.string.error_ssid_not_registered)
+                        return resultStr
                     }
                 }
 
@@ -332,27 +336,16 @@ class MainActivity : AppCompatActivity(), FolderSelectDialogFragment.OnFolderSel
 
                 /*** 完了メッセージを出力 ***/
                 //Common.showDialog(this, getString(R.string.dialog_title_info), getString(R.string.complete_message))
-                val toast = Toast.makeText(this, getString(R.string.complete_message), Toast.LENGTH_SHORT)
-                toast.show()
+                //val toast = Toast.makeText(this, getString(R.string.complete_message), Toast.LENGTH_SHORT)
+                //toast.show()
+                resultStr = getString(R.string.complete_message)
             }
-        } catch (e: SocketException) {
-            //Common.showDialog(this,"sエラー", e.toString())
-            val toast = Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT)
-            toast.show()
-            return "error"
-        } catch (e: IOException) {
-            //Common.showDialog(this,"iエラー", e.toString())
-            val toast = Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT)
-            toast.show()
-            return "error"
         } catch (e: Exception) {
-            //Common.showDialog(this,"eエラー", e.toString())
-            val toast = Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT)
-            toast.show()
-            return "error"
+            resultStr = e.toString()
+            return resultStr
         }
 
-        return ""
+        return resultStr
     }
 
     /**
@@ -420,49 +413,51 @@ class MainActivity : AppCompatActivity(), FolderSelectDialogFragment.OnFolderSel
      * @param port ポート
      * @param userName ユーザー名
      * @param password パスワード
+     *
+     * @return 空文字 or エラー
      */
-    private fun validate(host: String?, port: String?, userName: String?, password: String?, ssid: String?): Boolean {
+    private fun validate(host: String?, port: String?, userName: String?, password: String?, ssid: String?): String {
         /*** ホスト名 ***/
         if (host.equals("")) {
             //Common.showDialog(this, getString(R.string.dialog_title_error), getString(R.string.error_host_not_defined))
-            val toast = Toast.makeText(this, getString(R.string.error_host_not_defined), Toast.LENGTH_SHORT)
-            toast.show()
-            return false
+            //val toast = Toast.makeText(this, getString(R.string.error_host_not_defined), Toast.LENGTH_SHORT)
+            //toast.show()
+            return getString(R.string.error_host_not_defined)
         }
 
         /*** ポート ***/
         if (port.equals("")) {
             //Common.showDialog(this, getString(R.string.dialog_title_error), getString(R.string.error_port_not_defined))
-            val toast = Toast.makeText(this, getString(R.string.error_port_not_defined), Toast.LENGTH_SHORT)
-            toast.show()
-            return false
+            //val toast = Toast.makeText(this, getString(R.string.error_port_not_defined), Toast.LENGTH_SHORT)
+            //toast.show()
+            return getString(R.string.error_port_not_defined)
         }
 
         /*** ユーザー名 ***/
         if (userName.equals("")) {
             //Common.showDialog(this, getString(R.string.dialog_title_error), getString(R.string.error_username_not_defined))
-            val toast = Toast.makeText(this, getString(R.string.error_username_not_defined), Toast.LENGTH_SHORT)
-            toast.show()
-            return false
+            //val toast = Toast.makeText(this, getString(R.string.error_username_not_defined), Toast.LENGTH_SHORT)
+            //toast.show()
+            return getString(R.string.error_username_not_defined)
         }
 
         /*** パスワード ***/
         if (password.equals("")) {
             //Common.showDialog(this, getString(R.string.dialog_title_error), getString(R.string.error_password_not_defined))
-            val toast = Toast.makeText(this, getString(R.string.error_password_not_defined), Toast.LENGTH_SHORT)
-            toast.show()
-            return false
+            //val toast = Toast.makeText(this, getString(R.string.error_password_not_defined), Toast.LENGTH_SHORT)
+            //toast.show()
+            return getString(R.string.error_password_not_defined)
         }
 
         /*** SSID ***/
         if (ssid.equals("")) {
             //Common.showDialog(this, getString(R.string.dialog_title_error), getString(R.string.error_ssid_not_defined))
-            val toast = Toast.makeText(this, getString(R.string.error_ssid_not_defined), Toast.LENGTH_SHORT)
-            toast.show()
-            return false
+            //val toast = Toast.makeText(this, getString(R.string.error_ssid_not_defined), Toast.LENGTH_SHORT)
+            //toast.show()
+            return getString(R.string.error_ssid_not_defined)
         }
 
-        return true
+        return ""
     }
 
     private fun reload() {
@@ -481,7 +476,10 @@ class MainActivity : AppCompatActivity(), FolderSelectDialogFragment.OnFolderSel
         }
 
         override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
+            //super.onPostExecute(result)
+            //　結果をToastで表示
+            Log.d("debug", "call onPostExecute result $result")
+            Toast.makeText(this@MainActivity, result, Toast.LENGTH_SHORT).show()
         }
     }
 }
