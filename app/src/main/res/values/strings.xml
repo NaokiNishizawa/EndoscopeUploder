@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">EndoscopeUploader</string>
+    <string name="action_selectfolder">フォルダ選択</string>
+    <string name="action_upload">アップロード</string>
+    <string name="action_delete">削除</string>
+    <string name="action_settings">設定</string>
+    <!-- Settings -->
+    <string name="host_label">ホスト名</string>
+    <string name="port_label">ポート</string>
+    <string name="username_label">ユーザー名</string>
+    <string name="password_label">パスワード</string>
+    <string name="remotesavepath_label">保存先</string>
+    <string name="ssid_label">SSID</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="gallery_fragment_label">Gallery Fragment</string>
+    <string name="detail_fragment_label">Detail Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <!-- GridView -->
+    <string name="description">picture</string>
+    <!-- Dialog -->
+    <string name="decide">決定</string>
+    <string name="upper">上へ</string>
+    <string name="ok">OK</string>
+    <string name="cancel">キャンセル</string>
+    <string name="dialog_title_confirm">確認</string>
+    <string name="dialog_title_error">エラー</string>
+    <string name="dialog_title_info">情報</string>
+    <string name="file_not_found_message">フォルダ内に画像ファイルが見つかりませんでした。</string>
+    <string name="file_not_select_message">画像ファイルが選択されていません。</string>
+    <string name="confirm_dialog_message">選択されたファイルを削除してもよろしいですか？</string>
+    <string name="upload_dialog_message">選択された画像を送信します。よろしいですか？</string>
+    <string name="complete_message">送信完了しました。</string>
+    <string name="error_id_not_entered">IDを入力してください。</string>
+    <string name="error_folder_not_found">フォルダが見つかりません。</string>
+    <string name="error_host_not_defined">ホスト名が設定されていません。</string>
+    <string name="error_port_not_defined">ポートが設定されていません。</string>
+    <string name="error_username_not_defined">ユーザー名が設定されていません。</string>
+    <string name="error_password_not_defined">パスワードが設定されていません。</string>
+    <string name="error_ssid_not_defined">SSIDが設定されていません。</string>
+    <string name="error_ssid_not_registered">SSIDが登録されていません。先に端末の設定からSSIDを登録してください。</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="input_id_label">IDを入力してください（半角数字最大6桁）</string>
+</resources>

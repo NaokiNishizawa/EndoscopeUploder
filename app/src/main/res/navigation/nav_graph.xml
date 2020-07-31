@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/GalleryFragment">
+
+    <fragment
+        android:id="@+id/GalleryFragment"
+        android:name="com.omejibika.endoscope.GalleryFragment"
+        android:label="@string/gallery_fragment_label"
+        tools:layout="@layout/fragment_gallery">
+
+        <action
+            android:id="@+id/action_GalleryFragment_to_DetailFragment"
+            app:destination="@id/DetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/DetailFragment"
+        android:name="com.omejibika.endoscope.DetailFragment"
+        android:label="@string/detail_fragment_label"
+        tools:layout="@layout/fragment_detail">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/GalleryFragment" />
+    </fragment>
+</navigation>
