@@ -62,7 +62,8 @@ class MainActivity : AppCompatActivity(), FolderSelectDialogFragment.OnFolderSel
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
         recyclerView.addItemDecoration(GridItemDecoration(resources.getDimension(R.dimen.carousel_margin).toInt()))
-        recyclerView.setHasFixedSize(true)
+        recyclerView.setHasFixedSize(false)
+        recyclerView.setItemViewCacheSize(20)
         recyclerView.itemAnimator?.changeDuration = 0
     }
 
